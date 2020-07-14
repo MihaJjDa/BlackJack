@@ -10,8 +10,9 @@ class Dealer: public Player {
     DeckPile deck;
 public:
     Dealer();
+    void addPlayers(std::vector<Player> p);
     void makeDeckPile();
-    void handOut(Player player);
+    Card handOut();
     void handOutAll();
     void StartRound();
     void passMove(Player player);
