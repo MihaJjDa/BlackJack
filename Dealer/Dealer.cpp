@@ -1,10 +1,8 @@
-#include "Dealer.h"
+/*#include "Dealer.h"
 
 
 
-Dealer::Dealer(): Player() {}
-
-void Dealer::addPlayers(std::vector<Player> p) {
+void Dealer::addPlayers(std::vector<Player> *p) {
     players = p;
 }
 
@@ -18,12 +16,12 @@ Card Dealer::handOut() {
 }
 
 void Dealer::handOutAll() {
-    for (auto player : players)
+    for (auto player : *players)
         player.addCard(handOut());
 }
 
 void Dealer::StartRound() {
-    if (deck.size() < (players.size()+1)*15)
+    if (deck.size() < (players->size()+1)*15)
         makeDeckPile();
 
     handOutAll();
@@ -35,7 +33,7 @@ void Dealer::StartRound() {
         addCard(closedCard);
 
     if (points() < 21) {
-        for (auto player : players)
+        for (auto player : *players)
             passMove(player);
         while (points() < 17)
             addCard(deck.giveCard());
@@ -43,7 +41,7 @@ void Dealer::StartRound() {
             bust();
     }
 
-    for (auto player : players)
+    for (auto player : *players)
         if (player.isBusted())
             std::cout << "You lose" << std::endl;
         else if (isBusted())
@@ -52,18 +50,18 @@ void Dealer::StartRound() {
             else
                 std::cout << "You win 1" << std::endl;
         else
-            if (player.points() < points())
-                std::cout << "You lose" << std::endl;
-            else if (player.points() == points())
-                std::cout << "Draw" << std::endl;
-            else if (player.points() == 21)
-                std::cout << "You win 3/2" << std::endl;
-            else
-                std::cout << "You win 1" << std::endl;
+        if (player.points() < points())
+            std::cout << "You lose" << std::endl;
+        else if (player.points() == points())
+            std::cout << "Draw" << std::endl;
+        else if (player.points() == 21)
+            std::cout << "You win 3/2" << std::endl;
+        else
+            std::cout << "You win 1" << std::endl;
 }
 
 void Dealer::passMove(Player player) {
     player.play();
     if (player.points() > 21)
         player.bust();
-}
+}*/

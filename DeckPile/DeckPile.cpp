@@ -16,6 +16,8 @@ DeckPile::DeckPile(int countDecks) {
             countCards += 1;
         }
     }
+
+    shuffle();
 }
 
 DeckPile::~DeckPile() {

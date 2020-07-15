@@ -1,34 +1,8 @@
 #include "gtest/gtest.h"
 
-#include "Hand.h"
+#include "Dealer.h"
 
-TEST(Hand, Usage) {
-    Hand a;
-    a.addCard(Card(TWO, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(ACE, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(THREE, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(FIVE, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(JACK, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(QUEEN, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(KING, HEARTS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-    a.addCard(Card(KING, CLUBS));
-    std::cout << a.totalValue() << std::endl;
-    a.show();
-}
+TEST(Dealer, Usage) {}
 
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);

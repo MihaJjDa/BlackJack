@@ -1,7 +1,7 @@
 #include "BlackJackGame.h"
 
-BlackJackGame::BlackJackGame(int n) {
-    countPlayers = n;
+BlackJackGame::BlackJackGame(int numberPlayers) {
+    countPlayers = numberPlayers;
 }
 
 void BlackJackGame::makePlayers() {
@@ -9,13 +9,16 @@ void BlackJackGame::makePlayers() {
         players.push_back(Player());
 }
 
-void BlackJackGame::makeDealer() {}
+void BlackJackGame::makeDealer() {
+    dealer = Dealer();
+}
 
 void BlackJackGame::connectGame() {
-    dealer.addPlayers(players);
-    //for (auto player : players) player.addDealer(dealer);
+    dealer.addPlayers(&players);
+    for (int i = 0; i < countPlayers; i++)
+        players[i].addDealer(&dealer);
 }
 
 void BlackJackGame::startGame() {
-    dealer.StartRound();
+    dealer.startRound();
 }
