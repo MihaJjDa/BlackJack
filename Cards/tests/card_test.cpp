@@ -3,8 +3,8 @@
 #include <Card.h>
 
 TEST(Card, Usage) {
-    Card a(TEN, DIAMONDS);
-    Card b(ACE, CLUBS);
+    Card a(Ranks::TEN, Suits::DIAMONDS);
+    Card b(Ranks::ACE, Suits::CLUBS);
     a.show('\n');
     a = b;
     a.show('\n');

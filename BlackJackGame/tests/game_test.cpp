@@ -7,7 +7,6 @@ TEST(BlackJackGame, Usage) {
     game.makeDealer();
     game.makePlayers();
     game.connectGame();
-    // TODO: HOW TO TEST IT??????
 }
 
 int main(int argc, char *argv[]) {

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "BlackJackGame.h"
 
 int main() {
@@ -8,8 +6,6 @@ int main() {
     std::cout << "Another characters are not supported, sry" << std::endl;
 
     BlackJackGame game;
-    game.makeDealer();
-    game.makePlayers();
     game.connectGame();
     game.startGame();
     return 0;

@@ -5,13 +5,17 @@
 
 class BlackJackGame {
 public:
-    std::vector<Player> players;
-    Dealer dealer;
-    int countPlayers;
+    std::vector<Player> _players;
+    Dealer _dealer;
+    int _countPlayers;
 public:
     BlackJackGame(int numberPlayers = 1);
-    void makePlayers();
-    void makeDealer();
+    ~BlackJackGame();
+    BlackJackGame(const BlackJackGame& game) = delete;
+    BlackJackGame& operator=(const BlackJackGame& game) = delete;
+    BlackJackGame(BlackJackGame&& game) = delete;
+    BlackJackGame& operator=(BlackJackGame&& game) = delete;
+
     void connectGame();
     void startGame();
 };

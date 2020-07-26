@@ -1,40 +1,34 @@
 #include "Card.h"
 
-//TODO: DELETE DEFAULT CONSTRUCTOR BECAUSE OF DEALER
-Card::Card() {
-    rank = JACK;
-    suit = SPADES;
-}
 
-Card::Card(Ranks newRank, Suits newSuit) {
-    rank = newRank;
-    suit = newSuit;
-}
 
-void Card::show(char end) {
+Card::Card(Ranks rank, Suits suit)
+    : _rank(rank), _suit(suit) {}
+
+void Card::show(char end) const {
     std::cout << *this << end;
 }
 
 int Card::value() const {
     int v;
-    switch (rank) {
-        case TWO:
+    switch (_rank) {
+        case Ranks::TWO:
             v = 2; break;
-        case THREE:
+        case Ranks::THREE:
             v = 3; break;
-        case FOUR:
+        case Ranks::FOUR:
             v = 4; break;
-        case FIVE:
+        case Ranks::FIVE:
             v = 5; break;
-        case SIX:
+        case Ranks::SIX:
             v = 6; break;
-        case SEVEN:
+        case Ranks::SEVEN:
             v = 7; break;
-        case EIGHT:
+        case Ranks::EIGHT:
             v = 8; break;
-        case NINE:
+        case Ranks::NINE:
             v = 9; break;
-        case ACE:
+        case Ranks::ACE:
             v = 11; break;
         default:
             v = 10; break;
@@ -43,46 +37,46 @@ int Card::value() const {
 }
 
 std::ostream& operator<< (std::ostream &out, const Card card) {
-    switch (card.rank) {
-        case TWO:
+    switch (card._rank) {
+        case Ranks::TWO:
             out << "2"; break;
-        case THREE:
+        case Ranks::THREE:
             out << "3"; break;
-        case FOUR:
+        case Ranks::FOUR:
             out << "4"; break;
-        case FIVE:
+        case Ranks::FIVE:
             out << "5"; break;
-        case SIX:
+        case Ranks::SIX:
             out << "6"; break;
-        case SEVEN:
+        case Ranks::SEVEN:
             out << "7"; break;
-        case EIGHT:
+        case Ranks::EIGHT:
             out << "8"; break;
-        case NINE:
+        case Ranks::NINE:
             out << "9"; break;
-        case TEN:
-            out << "T"; break;
-        case JACK:
+        case Ranks::TEN:
+            out << "10"; break;
+        case Ranks::JACK:
             out << "J"; break;
-        case QUEEN:
+        case Ranks::QUEEN:
             out << "Q"; break;
-        case KING:
+        case Ranks::KING:
             out << "K"; break;
-        case ACE:
+        case Ranks::ACE:
             out << "A"; break;
     }
-    switch (card.suit) {
-        case CLUBS:
+    switch (card._suit) {
+        case Suits::CLUBS:
             out << "C"; break;
-        case DIAMONDS:
+        case Suits::DIAMONDS:
             out << "D"; break;
-        case HEARTS:
+        case Suits::HEARTS:
             out << "H"; break;
-        case SPADES:
+        case Suits::SPADES:
             out << "S"; break;
     }
-};
+}
 
 bool operator< (Card a, Card b) {
-    return a.rank < b.rank or a.rank == b.rank and a.suit < b.suit;
-};
+    return a._rank < b._rank or a._rank == b._rank and a._suit < b._suit;
+}

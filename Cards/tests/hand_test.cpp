@@ -4,28 +4,28 @@
 
 TEST(Hand, Usage) {
     Hand a;
-    a.addCard(Card(TWO, CLUBS));
+    a.addCard(Card(Ranks::TWO, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(ACE, CLUBS));
+    a.addCard(Card(Ranks::ACE, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(THREE, CLUBS));
+    a.addCard(Card(Ranks::THREE, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(FIVE, CLUBS));
+    a.addCard(Card(Ranks::FIVE, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(JACK, CLUBS));
+    a.addCard(Card(Ranks::JACK, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(QUEEN, CLUBS));
+    a.addCard(Card(Ranks::QUEEN, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(KING, HEARTS));
+    a.addCard(Card(Ranks::KING, Suits::HEARTS));
     std::cout << a.totalValue() << std::endl;
     a.show();
-    a.addCard(Card(KING, CLUBS));
+    a.addCard(Card(Ranks::KING, Suits::CLUBS));
     std::cout << a.totalValue() << std::endl;
     a.show();
 }

@@ -5,14 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(contrib/googletest)
 add_subdirectory(BlackJackGame)
-add_subdirectory(Card)
-add_subdirectory(Deck)
-add_subdirectory(DeckPile)
-add_subdirectory(Hand)
-add_subdirectory(Dealer)
-add_subdirectory(Player)
+add_subdirectory(Cards)
+add_subdirectory(Players)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME}
-        Dealer Player Card Deck Hand DeckPile BlackJackGame)
+        Player Card Deck Hand DeckPile BlackJackGame)

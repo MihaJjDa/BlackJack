@@ -2,14 +2,17 @@
 
 #include "DeckPile.h"
 
+
+
 TEST(DeckPile, Usage) {
     DeckPile a;
-    std::cout << a.size() << std::endl;
+    ASSERT_EQ(a.size(), 208);
     while (!a.empty()) {
         Card b = a.giveCard();
         b.show(' ');
     }
     std::cout << std::endl;
+    ASSERT_EQ(a.size(), 0);
 
     DeckPile c;
     c.shuffle();
