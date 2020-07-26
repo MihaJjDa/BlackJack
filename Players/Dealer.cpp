@@ -1,106 +1,14 @@
-#include "Player.h"
-
-
-
-Player::Player() : IPlayer(), _dealer(nullptr) {}
-
-Player::Player(Player&& player) {
-    _dealer = player._dealer;
-    _cards = player._cards;
-    _busted = player._busted;
-
-    player._dealer = nullptr;
-    player._cards = nullptr;
-    player._busted = false;
-}
-
-Player& Player::operator=(Player&& player) {
-    if (this != &player) {
-        _dealer = player._dealer;
-        _cards = player._cards;
-        _busted = player._busted;
-
-        player._dealer = nullptr;
-        player._cards = nullptr;
-        player._busted = false;
-    }
-    return *this;
-}
-
-void Player::addDealer(Dealer *d) {
-    _dealer = d;
-}
-
-void Player::play() {
-    char c = 'h';
-    while (c != 's' and points() < 21) {
-        show();
-        c = makeDecision();
-        if (c == 'h')
-            addCard(requestCard());
-        else if (c != 's')
-            std::cout << "Bad turn!\n";
-    }
-    if (points() > 21)
-        bust();
-}
-
-void Player::bust() {
-    show();
-    std::cout << "You're busted!" << std::endl;
-    _busted = true;
-}
-
-Card Player::requestCard() const {
-    return _dealer->handOut();
-}
-
-char Player::makeDecision() const {
-    char c;
-    std::cout << "Your turn: ";
-    std::cin >> c;
-    return c;
-}
-
-void Player::blackJack() const {
-    show();
-    std::cout << "You've got BlackJack!" << std::endl;
-}
-
-void Player::lose() const {
-    show();
-    std::cout << "You lose" << std::endl;
-}
-
-void Player::draw() const {
-    show();
-    std::cout << "Draw" << std::endl;
-}
-
-void Player::win1_0Bet() const {
-    show();
-    std::cout << "You win 1" << std::endl;
-}
-
-void Player::win1_5Bet() const {
-    show();
-    std::cout << "You win 3/2" << std::endl;
-}
-
-void Player::show() const {
-    std::cout << "Your hand: ";
-    _cards->show();
-    std::cout << " (" << points() << ")" << std::endl;
-}
+/*
+#include "Dealer.h"
 
 
 
 Dealer::Dealer(int numberDeck) : IPlayer()
-    , _players(nullptr)
-    , _closedCard(nullptr)
-    , _cardIsClosed(false)
-    , _countDeck(numberDeck)
-    , _deck(nullptr) {}
+        , _players(nullptr)
+        , _closedCard(nullptr)
+        , _cardIsClosed(false)
+        , _countDeck(numberDeck)
+        , _deck(nullptr) {}
 
 Dealer::~Dealer() {
     _players->clear();
@@ -141,7 +49,7 @@ void Dealer::play() {
     show();
     if (points() >= 10) {
         for (int i = 0; i < _players->size(); i++)
-            (*_players)[i].show();
+            (*_players)[i].lookAtCards();
         if (points() == 11) {
             std::cout << "Dealer got Ace!" << std::endl;
         } else if (points() == 10) {
@@ -242,3 +150,4 @@ void Dealer::show() const {
         std::cout << " ##";
     std::cout << " (" << points() << ")" << std::endl;
 }
+ */

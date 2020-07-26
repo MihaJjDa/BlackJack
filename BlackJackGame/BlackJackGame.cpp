@@ -19,5 +19,5 @@ void BlackJackGame::connectGame() {
 }
 
 void BlackJackGame::startGame() {
-    _dealer.startRound();
+    _dealer.play();
 }

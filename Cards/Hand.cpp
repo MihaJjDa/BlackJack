@@ -4,26 +4,22 @@
 
 
 
-Hand::Hand() : _cards(std::vector<Card>()) {}
-
-Hand::~Hand() {
-    _cards.clear();
-};
+Hand::Hand() : _cards(std::deque<Card>()) {}
 
 void Hand::addCard(Card card) {
-    if (_cards.empty()) {
-        _cards.push_back(card);
-    } else {
-        auto it = _cards.begin();
-        while (*it < card and it != _cards.end())
-            it += 1;
-        _cards.insert(it, card);
-    }
+//    if (_cards.empty()) {
+//        _cards.push_back(card);
+//    } else {
+    auto it = _cards.begin();
+    while (it != _cards.end() and *it < card)
+        it += 1;
+    _cards.insert(it, card);
+//    }
 }
 
-bool Hand::empty() const {
-    return _cards.empty();
-}
+//bool Hand::empty() const {
+//    return _cards.empty();
+//}
 
 int Hand::totalValue() const {
     int sum = 0;

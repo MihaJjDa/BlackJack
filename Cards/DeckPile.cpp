@@ -6,23 +6,24 @@
 
 
 DeckPile::DeckPile(int countDecks) {
-    Deck decks[countDecks];
+    Ranks ranks[13] = {Ranks::TWO, Ranks::THREE, Ranks::FOUR, Ranks::FIVE,
+                       Ranks::SIX, Ranks::SEVEN, Ranks::EIGHT, Ranks::NINE,
+                       Ranks::TEN, Ranks::JACK, Ranks::QUEEN, Ranks::KING,
+                       Ranks::ACE};
+    Suits suits[4] = {Suits::CLUBS, Suits::DIAMONDS,
+                      Suits::HEARTS, Suits::SPADES};
 
-    for (int i = 0; i < countDecks; i++)
-        while (!decks[i].empty())
-            _cards.push_back(decks[i].giveCard());
+    for (int k = 0; k < countDecks; k++)
+        for (int i = 0; i < 13; i++)
+            for (int j = 0; j < 4; j++)
+                _cards.push_back(Card(ranks[i], suits[j]));
 
     shuffle();
 }
 
-DeckPile::~DeckPile() {
-    _cards.clear();
-};
-
 Card DeckPile::giveCard() {
-    Card card = _cards.back();
-    _cards.pop_back();
-    //_countCards -= 1;
+    Card card = _cards.front();
+    _cards.pop_front();
     return card;
 }
 
@@ -39,6 +40,5 @@ bool DeckPile::empty() const {
 }
 
 int DeckPile::size() const {
-    //return _countCards;
     return _cards.size();
 }

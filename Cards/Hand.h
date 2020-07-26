@@ -1,14 +1,14 @@
 #pragma once
 
-#include <vector>
+#include <deque>
 
 #include "Card.h"
 
 class Hand {
-    std::vector<Card> _cards;
+    std::deque<Card> _cards;
 public:
     Hand();
-    ~Hand();
+    ~Hand() = default;
     Hand(const Hand& game) = delete;
     Hand& operator=(const Hand& game) = delete;
     Hand(Hand&& game) = default;
@@ -16,7 +16,7 @@ public:
 
     void addCard(Card card);
 
-    bool empty() const;
+    //bool empty() const;
     int totalValue() const;
     void show() const;
 };

@@ -4,9 +4,6 @@ project(Cards_Test)
 add_executable(Card_Test card_test.cpp)
 target_link_libraries(Card_Test Card gtest)
 
-add_executable(Deck_Test deck_test.cpp)
-target_link_libraries(Deck_Test Deck gtest)
-
 add_executable(DeckPile_Test deckPile_test.cpp)
 target_link_libraries(DeckPile_Test DeckPile gtest)
 

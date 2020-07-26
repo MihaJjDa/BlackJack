@@ -1,14 +1,14 @@
 #pragma once
 
-#include <vector>
+#include <deque>
 
-#include "Deck.h"
+#include "Card.h"
 
 class DeckPile {
-    std::vector<Card> _cards;
+    std::deque<Card> _cards;
 public:
     DeckPile(int countDecks = 4);
-    ~DeckPile();
+    ~DeckPile() = default;
     DeckPile(const DeckPile& game) = delete;
     DeckPile& operator=(const DeckPile& game) = delete;
     DeckPile(DeckPile&& game) = default;
