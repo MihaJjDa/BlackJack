@@ -7,20 +7,12 @@
 TEST(DeckPile, Usage) {
     DeckPile a;
     ASSERT_EQ(a.size(), 208);
+    ASSERT_FALSE(a.empty());
     while (!a.empty()) {
         Card b = a.giveCard();
-        b.show(' ');
     }
-    std::cout << std::endl;
     ASSERT_EQ(a.size(), 0);
-
-    DeckPile c;
-    c.shuffle();
-    while (!c.empty()) {
-        Card b = c.giveCard();
-        b.show(' ');
-    }
-    std::cout << std::endl;
+    ASSERT_TRUE(a.empty());
 }
 
 int main(int argc, char *argv[]) {

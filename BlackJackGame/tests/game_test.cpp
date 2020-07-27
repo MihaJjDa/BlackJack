@@ -4,8 +4,6 @@
 
 TEST(BlackJackGame, Usage) {
     BlackJackGame game;
-    game.makeDealer();
-    game.makePlayers();
     game.connectGame();
 }
 
