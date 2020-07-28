@@ -22,9 +22,9 @@ public:
     void win1_0Bet();
     void win1_5Bet();
 
-    void lookAtCards() const;
     void blackJack() const;
     void draw() const;
+    void lookAtCards() const;
 
     void play() override;
     void bust() override;

@@ -47,17 +47,6 @@ void Player::bust() {
     std::cout << "You're busted!" << std::endl;
 }
 
-Card Player::requestCard() const {
-    return _dealer->handOut();
-}
-
-char Player::makeDecision() const {
-    char c;
-    std::cout << "Your turn (h - hit, s - stand): ";
-    std::cin >> c;
-    return c;
-}
-
 void Player::lose() {
     show();
     std::cout << "You lose 1 bet: " << _bet << std::endl;
@@ -79,10 +68,6 @@ void Player::win1_5Bet() {
     std::cout << "Your cash: " << _cash << std::endl;
 }
 
-void Player::lookAtCards() const {
-    show();
-}
-
 void Player::blackJack() const {
     show();
     std::cout << "You've got BlackJack!" << std::endl;
@@ -94,12 +79,26 @@ void Player::draw() const {
     std::cout << "Your cash: " << _cash << std::endl;
 }
 
+void Player::lookAtCards() const {
+    show();
+}
+
 void Player::show() const {
     std::cout << "Your hand: ";
     _cards.show();
     std::cout << " (" << points() << ")" << std::endl;
 }
 
+Card Player::requestCard() const {
+    return _dealer->handOut();
+}
+
+char Player::makeDecision() const {
+    char c;
+    std::cout << "Your turn (h - hit, s - stand): ";
+    std::cin >> c;
+    return c;
+}
 
 
 Dealer::Dealer(int numberDeck)
