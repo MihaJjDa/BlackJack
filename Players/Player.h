@@ -11,21 +11,20 @@ class Dealer;
 
 class Player : public IPlayer {
     Dealer *_dealer;
+    int _cash;
+    int _bet;
 public:
-    Player();
-    ~Player() = default;
-    Player(const Player &player) = delete;
-    Player& operator=(const Player &player) = delete;
-    Player(Player&& player);
-    Player& operator=(Player&& player);
+    Player(Dealer *dealer = nullptr, int initCash = 100);
 
-    void addDealer(Dealer *d);
+    void makeBet();
+    void doubleBet();
+    void lose();
+    void win1_0Bet();
+    void win1_5Bet();
 
+    void lookAtCards() const;
     void blackJack() const;
-    void lose() const;
     void draw() const;
-    void win1_0Bet() const;
-    void win1_5Bet() const;
 
     void play() override;
     void bust() override;
@@ -38,19 +37,18 @@ private:
 
 
 
+#include "DeckPile.h"
+
+
+
 class Dealer: public IPlayer {
-    std::vector<Player> *_players;
+    std::vector<Player*> _players;
     int _countDeck;
-    DeckPile *_deck;
-    Card *_closedCard;
+    DeckPile _deck;
+    Card _closedCard;
     bool _cardIsClosed;
 public:
     Dealer(int numberDeck = 4);
-    ~Dealer();
-    Dealer(const Dealer& player) = delete;
-    Dealer& operator=(const Dealer& player) = delete;
-    Dealer(Dealer&& player) = delete ;
-    Dealer& operator=(Dealer&& player) = delete;
 
     Card handOut();
     void addPlayers(std::vector<Player> *players);

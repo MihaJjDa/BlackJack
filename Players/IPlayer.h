@@ -1,21 +1,14 @@
 #pragma once
 
 #include "Hand.h"
-#include "DeckPile.h"
 
 
 
 class IPlayer {
 protected:
-    Hand *_cards;
-    bool _busted;
+    Hand _cards;
 public:
-    IPlayer();
-    ~IPlayer();
-    IPlayer(const IPlayer &player) = delete;
-    IPlayer& operator=(const IPlayer &player) = delete;
-    IPlayer(IPlayer&& player) = delete;
-    IPlayer& operator=(IPlayer&& player) = delete;
+    IPlayer() = default;
 
     void addCard(Card card);
 
