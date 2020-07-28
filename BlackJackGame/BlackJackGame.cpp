@@ -1,21 +1,17 @@
 #include "BlackJackGame.h"
 
-BlackJackGame::BlackJackGame(int numberPlayers)
-    : _players(std::vector<Player>())
-    , _dealer(Dealer())
-    , _countPlayers(numberPlayers) {
-    for (int i = 0; i < _countPlayers; i++)
-        _players.push_back(Player());
-}
+BlackJackGame::BlackJackGame(int numberPlayers, int initCash, int numberDecks)
+    : _countPlayers(numberPlayers)
+    , _initCash(initCash)
+    , _dealer(Dealer(numberDecks)) {}
 
-BlackJackGame::~BlackJackGame() {
-    _players.clear();
+void BlackJackGame::addPlayers() {
+    for (int i = 0; i < _countPlayers; i++)
+        _players.push_back(Player(&_dealer, _initCash));
 }
 
 void BlackJackGame::connectGame() {
     _dealer.addPlayers(&_players);
-    for (int i = 0; i < _countPlayers; i++)
-        _players[i].addDealer(&_dealer);
 }
 
 void BlackJackGame::startGame() {

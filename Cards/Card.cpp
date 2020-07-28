@@ -2,12 +2,7 @@
 
 
 
-Card::Card(Ranks rank, Suits suit)
-    : _rank(rank), _suit(suit) {}
-
-void Card::show(char end) const {
-    std::cout << *this << end;
-}
+Card::Card(Ranks rank, Suits suit) : _rank(rank), _suit(suit) {}
 
 int Card::value() const {
     int v;
@@ -34,6 +29,10 @@ int Card::value() const {
             v = 10; break;
     }
     return v;
+}
+
+void Card::show(char end) const {
+    std::cout << *this << end;
 }
 
 std::ostream& operator<< (std::ostream &out, const Card card) {

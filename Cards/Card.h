@@ -29,17 +29,11 @@ class Card {
     Ranks _rank;
     Suits _suit;
 public:
-    Card(Ranks rank, Suits suit);
-    ~Card() = default;
-    Card(const Card& game) = default;
-    Card& operator=(const Card& game) = default;
-    Card(Card&& game) = default;
-    Card& operator=(Card&& game) = default;
+    Card(Ranks rank = Ranks::JACK, Suits suit = Suits::SPADES);
 
-    void show(char end = '\0') const;
     int value() const;
+    void show(char end = '\0') const;
 private:
     friend std::ostream& operator<<(std::ostream &out, Card card);
-//protected:
     friend bool operator<(Card a, Card b);
 };

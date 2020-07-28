@@ -4,8 +4,6 @@
 
 
 
-Hand::Hand() : _cards(std::deque<Card>()) {}
-
 void Hand::addCard(Card card) {
     auto it = _cards.begin();
     while (it != _cards.end() and *it < card)

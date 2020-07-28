@@ -27,18 +27,18 @@ Card DeckPile::giveCard() {
     return card;
 }
 
-void DeckPile::shuffle() {
-    // TODO: CEED FOR RANDOM???
-    std::random_device randomDevice;
-    std::default_random_engine engine(randomDevice());
-
-    std::shuffle(_cards.begin(), _cards.end(), engine);
-}
-
 bool DeckPile::empty() const {
     return _cards.empty();
 }
 
 int DeckPile::size() const {
     return _cards.size();
+}
+
+void DeckPile::shuffle() {
+    // TODO: CEED FOR RANDOM???
+    std::random_device randomDevice;
+    std::default_random_engine engine(randomDevice());
+
+    std::shuffle(_cards.begin(), _cards.end(), engine);
 }
