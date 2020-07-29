@@ -11,12 +11,13 @@ public:
     IPlayer() = default;
 
     void addCard(Card card);
+    void setHand();
 
     int points() const;
     bool isBusted() const;
 
-    virtual void play() = 0;
     virtual void bust() = 0;
 
+    virtual bool gameIsOn() const = 0;
     virtual void show() const = 0;
 };

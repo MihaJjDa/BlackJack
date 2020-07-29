@@ -9,23 +9,33 @@ Player::Player(Dealer *dealer, int initCash)
 
 void Player::makeBet() {
     std::cout << "Your cash: " << _cash << ", your bet: ";
-    std::cin >> _bet;
+    do {
+        std::cin >> _bet;
+        if (_bet > _cash) {
+            std::cout << "Bad bet!" << std::endl;
+            std::cout << "Your cash: " << _cash << ", your bet: ";
+        }
+    } while (_bet > _cash);
 }
 
 void Player::doubleBet() {
-    char c;
-    do {
-        std::cout << "Your cash: " << _cash
-                  << ", your bet: " << _bet << std::endl;
-        std::cout << "Would you double your bet (y/n): ";
-        std::cin >> c;
-        if (c == 'y')
-            _bet *= 2;
-        else if (c != 'n')
-            std::cout << "Bad turn!" << std::endl;
-    } while (c != 'y' and c != 'n');
     std::cout << "Your cash: " << _cash
               << ", your bet: " << _bet << std::endl;
+    if (_bet * 2 > _cash)
+        std::cout << "You can't double your bet!" << std::endl;
+    else {
+        char c;
+        do {
+            std::cout << "Would you double your bet (y/n): ";
+            std::cin >> c;
+            if (c == 'y')
+                _bet *= 2;
+            else if (c != 'n')
+                std::cout << "Bad turn!" << std::endl;
+            std::cout << "Your cash: " << _cash
+                      << ", your bet: " << _bet << std::endl;
+        } while (c != 'y' and c != 'n');
+    }
 }
 
 void Player::play() {
@@ -40,11 +50,6 @@ void Player::play() {
     }
     if (points() > 21)
         bust();
-}
-
-void Player::bust() {
-    show();
-    std::cout << "You're busted!" << std::endl;
 }
 
 void Player::lose() {
@@ -83,6 +88,32 @@ void Player::lookAtCards() const {
     show();
 }
 
+void Player::bust() {
+    show();
+    std::cout << "You're busted!" << std::endl;
+}
+
+bool Player::gameIsOn() const {
+    if (_cash > 0) {
+        bool ok;
+        char c;
+        do {
+            std::cout << "Would you continue (y/n): ";
+            std::cin >> c;
+            if (c == 'y')
+                ok = true;
+            else if (c == 'n')
+                ok = false;
+            else
+                std::cout << "Bad turn!" << std::endl;
+        } while (c != 'y' and c != 'n');
+        return ok;
+    } else {
+        std::cout << "Your cash is empty!" << std::endl;
+        return false;
+    }
+}
+
 void Player::show() const {
     std::cout << "Your hand: ";
     _cards.show();
@@ -99,6 +130,7 @@ char Player::makeDecision() const {
     std::cin >> c;
     return c;
 }
+
 
 
 Dealer::Dealer(int numberDeck)
@@ -125,12 +157,14 @@ void Dealer::handOutAll() {
         (*p)->addCard(handOut());
 }
 
-// TODO: TOO BIG FUNCTION
-void Dealer::play() {
-    std::cout << std::endl;
-
+// TODO: UNREADABLE FUNCTION
+bool Dealer::play() {
     if (_deck.size() < (_players.size() + 1) * 15)
         makeDeckPile();
+
+    setHand();
+    for (auto p = _players.begin(); p < _players.end(); p++)
+        (*p)->setHand();
 
     for (auto p = _players.begin(); p < _players.end(); p++)
         (*p)->makeBet();
@@ -202,17 +236,21 @@ void Dealer::play() {
 
     for (auto p = _players.begin(); p < _players.end(); p++)
         resolve(*p);
-}
 
-void Dealer::bust() {
-    show();
-    std::cout << "Dealer's busted!" << std::endl;
+    return gameIsOn();
 }
 
 bool Dealer::allPlayersBusted() const {
     bool ok = false;
     for (auto p = _players.begin(); p < _players.end(); p++)
         ok = (*p)->isBusted();
+    return ok;
+}
+
+bool Dealer::gameIsOn() const {
+    bool ok = true;
+    for (auto p = _players.begin(); p < _players.end(); p++)
+        ok = ok and (*p)->gameIsOn();
     return ok;
 }
 
@@ -243,6 +281,11 @@ void Dealer::resolve(Player *player) const {
                 player->win1_0Bet();
         }
     }
+}
+
+void Dealer::bust() {
+    show();
+    std::cout << "Dealer's busted!" << std::endl;
 }
 
 void Dealer::show() const {

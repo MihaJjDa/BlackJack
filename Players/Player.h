@@ -22,11 +22,12 @@ public:
     void win1_0Bet();
     void win1_5Bet();
 
+    bool gameIsOn() const;
     void blackJack() const;
     void draw() const;
     void lookAtCards() const;
 
-    void play() override;
+    void play();
     void bust() override;
 
     void show() const override;
@@ -53,7 +54,7 @@ public:
     Card handOut();
     void addPlayers(std::vector<Player> *players);
 
-    void play() override;
+    bool play();
 private:
     void makeDeckPile();
     void handOutAll();
@@ -64,5 +65,6 @@ private:
 
     void bust() override;
 
+    bool gameIsOn() const override;
     void show() const override;
 };
