@@ -49,12 +49,10 @@ void Player::play() {
         show();
         std::cout << "Your turn (h - hit, s - stand): ";
         std::cin >> c;
-        if (c == 'h') {
-            addCard(requestCard());
-        } else if (c != 's') {
-            std::cout << std::endl;
-            std::cout << "Bad turn!\n";
-        }
+        if (c == 'h')
+            addCard(_dealer->handOut());
+        else if (c != 's')
+            std::cout << std::endl << "Bad turn!" << std::endl;
     }
     std::cout << std::endl;
     if (points() == 21) {
@@ -89,10 +87,6 @@ void Player::draw() const {
     std::cout << "Your cash: " << _cash << std::endl;
 }
 
-void Player::lookAtCards() const {
-    show();
-}
-
 bool Player::gameIsOn() const {
     bool ok;
     if (_cash > 0) {
@@ -114,14 +108,14 @@ bool Player::gameIsOn() const {
     return ok;
 }
 
+void Player::lookAtCards() const {
+    show();
+}
+
 void Player::show() const {
     std::cout << "Your hand: ";
     _cards.show();
     std::cout << " (" << points() << ")" << std::endl;
-}
-
-Card Player::requestCard() const {
-    return _dealer->handOut();
 }
 
 
@@ -149,13 +143,11 @@ bool Dealer::playRound() {
             show();
             std::cout << "Dealer has got BlackJack!" << std::endl << std::endl;
         } else {
-            //show();
             std::cout << "Dealer hasn't got BlackJack" << std::endl;
             allPlay(true);
             play();
         }
     } else {
-        //show();
         allPlay(true);
         play();
     }
@@ -222,7 +214,7 @@ void Dealer::allDoubleBet() const {
         (*p)->doubleBet();
 }
 
-void Dealer::allPlay(bool passingMove) const {
+void Dealer::allPlay() const {
     for (auto p = _players.begin(); p < _players.end(); p++)
         (*p)->play();
 }

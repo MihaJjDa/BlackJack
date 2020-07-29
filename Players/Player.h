@@ -18,20 +18,18 @@ public:
 
     void makeBet();
     void doubleBet();
+    void play() override;
+
     void lose();
     void win1_0Bet();
     void win1_5Bet();
+    void draw() const;
 
     bool gameIsOn() const override;
-    void draw() const;
+
     void lookAtCards() const;
-
-    void play() override;
-
-
-    void show() const override;
 private:
-    Card requestCard() const;
+    void show() const override;
 };
 
 
@@ -49,11 +47,10 @@ class Dealer: public IPlayer {
 public:
     Dealer(int numberDeck = 4);
 
-    Card handOut();
     void addPlayers(std::vector<Player> *players);
-
     bool playRound();
 
+    Card handOut();
     void show() const override;
 private:
     void setRound();
@@ -63,7 +60,7 @@ private:
     void allHandOut();
     void allLookAtCards() const;
     void allDoubleBet() const;
-    void allPlay(bool passingMove) const;
+    void allPlay() const;
     void allResolve() const;
 
     bool gameIsOn() const override;

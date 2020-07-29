@@ -11,4 +11,4 @@ add_subdirectory(Players)
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME}
-        Player Card DeckPile Hand BlackJackGame)
+        Player Dealer Card DeckPile Hand BlackJackGame)
