@@ -8,9 +8,13 @@ BlackJackGame::BlackJackGame(int numberPlayers,
     , _dealer(Dealer(numberDecks)) {}
 
 void BlackJackGame::addPlayers() {
+    std::string name;
     _players.clear();
-    for (int i = 0; i < _countPlayers; i++)
-        _players.push_back(Player(&_dealer, _initCash));
+    for (int i = 0; i < _countPlayers; i++) {
+        std::cout << "Input name of player #" << i << ": ";
+        std::cin >> name;
+        _players.push_back(Player(name, &_dealer, _initCash));
+    }
 }
 
 void BlackJackGame::connectGame() {

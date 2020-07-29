@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <string>
+
 #include "IPlayer.h"
 
 // TODO: TESTS IN ASSERTS FOR EVERY METHOD
@@ -10,11 +12,12 @@
 class Dealer;
 
 class Player : public IPlayer {
+    std::string _name;
     Dealer *_dealer;
     int _cash;
     int _bet;
 public:
-    Player(Dealer *dealer = nullptr, int initCash = 100);
+    Player(std::string name, Dealer *dealer = nullptr, int initCash = 100);
 
     void makeBet();
     void doubleBet();

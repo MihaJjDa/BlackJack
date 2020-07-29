@@ -2,89 +2,90 @@
 
 
 
-Player::Player(Dealer *dealer, int initCash)
-    : _dealer(dealer)
+Player::Player(std::string name, Dealer *dealer, int initCash)
+    : _name(name)
+    , _dealer(dealer)
     , _cash(initCash)
     , _bet(0) {}
 
 void Player::makeBet() {
-    std::cout << "Your cash: " << _cash << ", your bet: ";
+    std::cout << _name << ": your cash: " << _cash << ", your bet: ";
     do {
         std::cin >> _bet;
         if (_bet > _cash) {
-            std::cout << "Bad bet!" << std::endl;
-            std::cout << "Your cash: " << _cash << ", your bet: ";
+            std::cout << _name << ": bad bet!" << std::endl;
+            std::cout << _name << ": your cash: " << _cash << ", your bet: ";
         }
     } while (_bet > _cash);
 }
 
 void Player::doubleBet() {
     if (_dealer->points() == 11) {
-        std::cout << "Dealer has got Ace!" << std::endl;
+        std::cout << _name << ": dealer has got Ace!" << std::endl;
     } else if (_dealer->points() == 10) {
-        std::cout << "Dealer has got 10 points!" << std::endl;
+        std::cout << _name << ": dealer has got 10 points!" << std::endl;
     }
     if (_bet * 2 > _cash) {
-        std::cout << "You can't double your bet!" << std::endl;
+        std::cout << _name << ": you can't double your bet!" << std::endl;
     } else {
         char c;
         do {
-            std::cout << "Would you double your bet (y/n): ";
+            std::cout << _name << ": would you double your bet (y/n): ";
             std::cin >> c;
             if (c == 'y')
                 _bet *= 2;
             else if (c != 'n')
-                std::cout << "Bad turn!" << std::endl;
+                std::cout << _name << ": bad turn!" << std::endl;
         } while (c != 'y' and c != 'n');
     }
-    std::cout << std::endl;
 }
 
 void Player::play() {
     char c = 'h';
     while (c != 's' and points() < 21) {
-        std::cout << "Your cash: " << _cash
+        std::cout << _name << ": your cash: " << _cash
                   << ", your bet: " << _bet << std::endl;
         _dealer->show();
         show();
-        std::cout << "Your turn (h - hit, s - stand): ";
+        std::cout << _name << ": your turn (h - hit, s - stand): ";
         std::cin >> c;
         if (c == 'h')
             addCard(_dealer->handOut());
         else if (c != 's')
-            std::cout << std::endl << "Bad turn!" << std::endl;
+            std::cout << std::endl << _name << ": bad turn!" << std::endl;
     }
     std::cout << std::endl;
     if (points() == 21) {
         show();
-        std::cout << "You've got BlackJack!" << std::endl << std::endl;
+        std::cout << _name << ": you've got BlackJack!" << std::endl
+                                                        << std::endl;
     } else if (points() > 21) {
         show();
-        std::cout << "You're busted!" << std::endl << std::endl;
+        std::cout << _name << ": you're busted!" << std::endl << std::endl;
     }
 }
 
 void Player::lose() {
-    std::cout << "You lose 1 bet: " << _bet << std::endl;
+    std::cout << _name << ": you lose 1 bet: " << _bet << std::endl;
     _cash -= _bet;
-    std::cout << "Your cash: " << _cash << std::endl;
+    std::cout << _name << ": your cash: " << _cash << std::endl << std::endl;
 }
 
 void Player::win1_0Bet() {
-    std::cout << "You win 1 bet: " << _bet << std::endl;
+    std::cout << _name << ": you win 1 bet: " << _bet << std::endl;
     _cash += _bet;
-    std::cout << "Your cash: " << _cash << std::endl;
+    std::cout << _name << ": your cash: " << _cash << std::endl << std::endl;
 }
 
 void Player::win1_5Bet() {
-    std::cout << "You win 3/2 bet: " << _bet * 3/2 << std::endl;
+    std::cout << _name << ": you win 3/2 bet: " << _bet * 3/2 << std::endl;
     _cash += _bet * 3/2;
-    std::cout << "Your cash: " << _cash << std::endl;
+    std::cout << _name << ": your cash: " << _cash << std::endl << std::endl;
 }
 
 void Player::draw() const {
-    std::cout << "Draw" << std::endl;
-    std::cout << "Your cash: " << _cash << std::endl;
+    std::cout << _name << ": draw" << std::endl;
+    std::cout << _name << ": your cash: " << _cash << std::endl << std::endl;
 }
 
 bool Player::gameIsOn() const {
@@ -92,17 +93,17 @@ bool Player::gameIsOn() const {
     if (_cash > 0) {
         char c;
         do {
-            std::cout << "Would you continue (y/n): ";
+            std::cout << _name << ": would you continue (y/n): ";
             std::cin >> c;
             if (c == 'y')
                 ok = true;
             else if (c == 'n')
                 ok = false;
             else
-                std::cout << "Bad turn!" << std::endl;
+                std::cout << _name << ": bad turn!" << std::endl;
         } while (c != 'y' and c != 'n');
     } else {
-        std::cout << "Your cash is empty!" << std::endl;
+        std::cout << _name << ": your cash is empty!" << std::endl;
         ok = false;
     }
     return ok;
@@ -113,7 +114,7 @@ void Player::lookAtCards() const {
 }
 
 void Player::show() const {
-    std::cout << "Your hand: ";
+    std::cout << _name << ": your hand: ";
     _cards.show();
     std::cout << " (" << points() << ")" << std::endl;
 }
@@ -137,6 +138,7 @@ void Dealer::addPlayers(std::vector<Player> *players) {
 
 bool Dealer::playRound() {
     setRound();
+    std::cout << std::endl;
     if (points() >= 10) {
         if (_closedCard.value() + points() == 21) {
             addClosedCard();
@@ -144,14 +146,15 @@ bool Dealer::playRound() {
             std::cout << "Dealer has got BlackJack!" << std::endl << std::endl;
         } else {
             std::cout << "Dealer hasn't got BlackJack" << std::endl;
-            allPlay(true);
+            allPlay();
             play();
         }
     } else {
-        allPlay(true);
+        allPlay();
         play();
     }
     allResolve();
+    std::cout << std::endl;
     return gameIsOn();
 }
 
