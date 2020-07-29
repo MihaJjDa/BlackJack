@@ -20,11 +20,6 @@ void Player::makeBet() {
 }
 
 void Player::doubleBet() {
-    if (_dealer->points() == 11) {
-        std::cout << _name << ": dealer has got Ace!" << std::endl;
-    } else if (_dealer->points() == 10) {
-        std::cout << _name << ": dealer has got 10 points!" << std::endl;
-    }
     if (_bet * 2 > _cash) {
         std::cout << _name << ": you can't double your bet!" << std::endl;
     } else {
@@ -53,13 +48,15 @@ void Player::play() {
             addCard(_dealer->handOut());
         else if (c != 's')
             std::cout << std::endl << _name << ": bad turn!" << std::endl;
+        if (points() <= 21)
+            std::cout << std::endl;
     }
-    std::cout << std::endl;
     if (points() == 21) {
         show();
         std::cout << _name << ": you've got BlackJack!" << std::endl
                                                         << std::endl;
     } else if (points() > 21) {
+        std::cout << std::endl;
         show();
         std::cout << _name << ": you're busted!" << std::endl << std::endl;
     }
@@ -154,7 +151,6 @@ bool Dealer::playRound() {
         play();
     }
     allResolve();
-    std::cout << std::endl;
     return gameIsOn();
 }
 
@@ -169,11 +165,17 @@ void Dealer::setRound() {
     setClosedCard();
     show();
     allLookAtCards();
+    if (points() == 11)
+        std::cout << "Dealer has got Ace!" << std::endl;
+    else if (points() == 10)
+        std::cout << "Dealer has got 10 points!" << std::endl;
     allDoubleBet();
 }
 
 void Dealer::play() {
-    if (not allPlayersBusted()) {
+    if (allPlayersBusted()) {
+        std::cout << "All players are busted!" << std::endl << std::endl;
+    } else {
         addClosedCard();
         if (points() < 17)
             show();
@@ -249,8 +251,8 @@ void Dealer::addClosedCard() {
 }
 
 bool Dealer::allPlayersBusted() const {
-    bool ok = false;
-    for (auto p = _players.begin(); not ok and p < _players.end(); p++)
+    bool ok = true;
+    for (auto p = _players.begin(); ok and p < _players.end(); p++)
         ok = (*p)->isBusted();
     return ok;
 }

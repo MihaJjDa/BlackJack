@@ -11,7 +11,7 @@ void BlackJackGame::addPlayers() {
     std::string name;
     _players.clear();
     for (int i = 0; i < _countPlayers; i++) {
-        std::cout << "Input name of player #" << i << ": ";
+        std::cout << "Input name of player #" << i+1 << ": ";
         std::cin >> name;
         _players.push_back(Player(name, &_dealer, _initCash));
     }
