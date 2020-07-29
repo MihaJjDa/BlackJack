@@ -21,7 +21,7 @@ void BlackJackGame::startGame() {
     bool gameOn;
     do {
         std::cout << std::endl;
-        gameOn = _dealer.play();
+        gameOn = _dealer.playRound();
     } while (gameOn);
 
 }

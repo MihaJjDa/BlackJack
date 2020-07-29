@@ -16,7 +16,7 @@ public:
     int points() const;
     bool isBusted() const;
 
-    virtual void bust() = 0;
+    virtual void play() = 0;
 
     virtual bool gameIsOn() const = 0;
     virtual void show() const = 0;
