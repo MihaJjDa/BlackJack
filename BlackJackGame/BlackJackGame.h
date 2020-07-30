@@ -1,11 +1,11 @@
-#include <vector>
+#include <deque>
 
 //#include "Dealer.h"
 #include "Player.h"
 
 class BlackJackGame {
 public:
-    std::vector<Player> _players;
+    std::deque<Player*> _players;
     int _countPlayers;
     int _initCash;
     Dealer _dealer;

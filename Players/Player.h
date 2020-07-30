@@ -16,11 +16,11 @@ class Player : public IPlayer {
     Dealer *_dealer;
     int _cash;
     int _bet;
+    bool _doubled;
 public:
     Player(std::string name, Dealer *dealer = nullptr, int initCash = 100);
 
     void makeBet();
-    void doubleBet();
     void play() override;
 
     void lose();
@@ -28,21 +28,26 @@ public:
     void win1_5Bet();
     void draw() const;
 
-    bool gameIsOn() const override;
+    bool gameIsOn() const;
 
     void lookAtCards() const;
 private:
+    void setTurn() const;
+    char playTurn(bool first);
+    void finishTurn() const;
     void show() const override;
 };
 
 
+
+#include <deque>
 
 #include "DeckPile.h"
 
 
 
 class Dealer: public IPlayer {
-    std::vector<Player*> _players;
+    std::deque<Player*> *_players;
     int _countDeck;
     DeckPile _deck;
     Card _closedCard;
@@ -50,8 +55,8 @@ class Dealer: public IPlayer {
 public:
     Dealer(int numberDeck = 4);
 
-    void addPlayers(std::vector<Player> *players);
-    bool playRound();
+    void addPlayers(std::deque<Player*> *players);
+    std::deque<Player*> playRound();
 
     Card handOut();
     void show() const override;
@@ -62,11 +67,10 @@ private:
     void allMakeBet() const;
     void allHandOut();
     void allLookAtCards() const;
-    void allDoubleBet() const;
     void allPlay() const;
     void allResolve() const;
 
-    bool gameIsOn() const override;
+    std::deque<Player*> gameIsOn() const;
     void play() override;
 
     void addOpenedCard();
