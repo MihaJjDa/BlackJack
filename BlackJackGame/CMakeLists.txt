@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(${PROJECT_NAME} BlackJackGame.cpp BlackJackGame.h)
 target_include_directories(${PROJECT_NAME} PUBLIC .)
 
-target_link_libraries(${PROJECT_NAME} Player)
+target_link_libraries(${PROJECT_NAME} Player Dealer)
 
 add_subdirectory(tests)
