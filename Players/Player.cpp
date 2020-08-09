@@ -11,13 +11,7 @@ Player::Player(std::string name, Dealer *dealer, int initCash)
 
 void Player::makeBet() {
     std::cout << _name << "| Your cash: " << _cash << "; Your bet: ";
-    do {
-        std::cin >> _bet;
-        if (_bet > _cash) {
-            std::cout << _name << "| Bad bet!" << std::endl;
-            std::cout << _name << "| Your cash: " << _cash << "; Your bet: ";
-        }
-    } while (_bet > _cash);
+    _bet = bet();
 }
 
 void Player::play() {
@@ -66,8 +60,7 @@ char Player::playTurn(bool first) {
         std::cout << "(d - double, h - hit, s - stand): ";
     else
         std::cout << "(h - hit, s - stand): ";
-    std::cin >> c;
-    return c;
+    return turn();
 }
 
 void Player::finishTurn() const {
@@ -105,17 +98,7 @@ void Player::draw() const {
 bool Player::gameIsOn() const {
     bool ok;
     if (_cash > 0) {
-        char c;
-        do {
-            std::cout << _name << "| Would you continue (y/n): ";
-            std::cin >> c;
-            if (c == 'y')
-                ok = true;
-            else if (c == 'n')
-                ok = false;
-            else
-                std::cout << _name << "| Bad turn!" << std::endl;
-        } while (c != 'y' and c != 'n');
+        ok = cont();
     } else {
         std::cout << _name << "| Your cash is empty!" << std::endl;
         ok = false;

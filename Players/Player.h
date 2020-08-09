@@ -8,6 +8,7 @@
 // TODO: TESTS IN ASSERTS FOR EVERY METHOD
 
 class Player : public IPlayer {
+protected:
     std::string _name;
     Dealer *_dealer;
     int _cash;
@@ -30,4 +31,9 @@ private:
     char playTurn(bool first);
     void finishTurn() const;
     void show() const override;
+protected:
+    virtual int bet() const = 0;
+    virtual char turn() const = 0;
+    virtual bool cont() const = 0;
+
 };

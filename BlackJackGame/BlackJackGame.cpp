@@ -15,10 +15,10 @@ void BlackJackGame::addPlayers() {
     for (int i = 0; i < _countPlayers; i++) {
         std::cout << "Input name of player #" << i+1 << ": ";
         std::cin >> name;
-        _players.push_back(new Player(name, &_dealer, _initCash));
+        _players.push_back(new LocalPlayer(name, &_dealer, _initCash));
     }
     for (int i = 0; i < _countBots; i++)
-        _players.push_back(new Player("Bot" + std::to_string(i+1),
+        _players.push_back(new ArtificalPlayer("Bot" + std::to_string(i+1),
                                          &_dealer,
                                          _initCash));
 }
