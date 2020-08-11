@@ -2,12 +2,12 @@
 
 #include <string>
 
-#include "Player.h"
+#include "IPlayer.h"
 #include "Dealer.h"
 
 // TODO: TESTS IN ASSERTS FOR EVERY METHOD
 
-class ArtificalPlayer : public Player {
+class ArtificalPlayer : public IPlayer {
 public:
     ArtificalPlayer(std::string name, Dealer *dealer = nullptr, int initCash = 100);
 

@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 
-#include "Player.h"
+#include "IPlayer.h"
 
 TEST(Player, Usage) {
-    Player p;
+    IPlayer p;
     p.addCard(Card(Ranks::JACK, Suits::SPADES));
     ASSERT_EQ(p.points(), 10);
     p.addCard(Card(Ranks::JACK, Suits::SPADES));

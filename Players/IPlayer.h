@@ -1,29 +1,41 @@
 #pragma once
 
-#include "Hand.h"
+#include <string>
 
+#include "IHolder.h"
+#include "Dealer.h"
 
+// TODO: TESTS IN ASSERTS FOR EVERY METHOD
 
-class IPlayer {
+class Dealer;
+
+class IPlayer : public IHolder {
 protected:
-    Hand _cards;
+    std::string _name;
+    Dealer *_dealer;
+    int _cash;
+    int _bet;
+    bool _doubled;
 public:
-    IPlayer() = default;
+    IPlayer(std::string name, Dealer *dealer = nullptr, int initCash = 100);
 
-    void addCard(Card card);
-    void setHand();
+    void makeBet();
+    void play() override;
+    void lose();
+    void win1_0Bet();
+    void win1_5Bet();
 
-    int points() const;
-    bool isBusted() const;
+    void draw() const;
+    bool gameIsOn() const;
+    void lookAtCards() const;
+private:
+    void setTurn() const;
+    char playTurn(bool first);
+    void finishTurn() const;
+    void show() const override;
+protected:
+    virtual int bet() const = 0;
+    virtual char turn() const = 0;
+    virtual bool cont() const = 0;
 
-    virtual void makeBet() {}
-    virtual void play() = 0;
-    virtual void lose() {}
-    virtual void win1_0Bet() {}
-    virtual void win1_5Bet() {}
-
-    virtual void draw() const {}
-    virtual bool gameIsOn() const {}
-    virtual void lookAtCards() const {}
-    virtual void show() const = 0;
 };

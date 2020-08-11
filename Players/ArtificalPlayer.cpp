@@ -3,7 +3,7 @@
 
 
 ArtificalPlayer::ArtificalPlayer(std::string name, Dealer *dealer, int initCash)
-    : Player(name, dealer, initCash) {}
+    : IPlayer(name, dealer, initCash) {}
 
 int ArtificalPlayer::bet() const {
     int b;

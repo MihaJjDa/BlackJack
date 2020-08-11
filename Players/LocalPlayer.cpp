@@ -3,7 +3,7 @@
 
 
 LocalPlayer::LocalPlayer(std::string name, Dealer *dealer, int initCash)
-        : Player(name, dealer, initCash) {}
+        : IPlayer(name, dealer, initCash) {}
 
 int LocalPlayer::bet() const {
     int b;

@@ -3,9 +3,12 @@
 #include <deque>
 
 #include "DeckPile.h"
+#include "IHolder.h"
 #include "IPlayer.h"
 
-class Dealer: public IPlayer {
+class IPlayer;
+
+class Dealer: public IHolder {
     std::deque<IPlayer*> *_players;
     int _countDeck;
     DeckPile _deck;

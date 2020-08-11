@@ -2,12 +2,12 @@
 
 #include <string>
 
-#include "Player.h"
+#include "IPlayer.h"
 #include "Dealer.h"
 
 // TODO: TESTS IN ASSERTS FOR EVERY METHOD
 
-class LocalPlayer : public Player {
+class LocalPlayer : public IPlayer {
 public:
     LocalPlayer(std::string name, Dealer *dealer = nullptr, int initCash = 100);
 
