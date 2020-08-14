@@ -3,7 +3,8 @@
 #include <deque>
 
 #include "Dealer.h"
-#include "Player.h"
+#include "ArtificalPlayer.h"
+#include "LocalPlayer.h"
 
 class BlackJackGame {
 public:
